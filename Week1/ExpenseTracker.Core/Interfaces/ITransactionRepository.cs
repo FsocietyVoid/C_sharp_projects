@@ -1,6 +1,6 @@
 using ExpenseTracker.Core.Entities;
 
-namespace ExpenseTracket.Core.Interfaces;
+namespace ExpenseTracker.Core.Interfaces;
 
 public interface ITransactionRepository
 {
