@@ -21,4 +21,21 @@ public class TransactionsController : ControllerBase
         await _service.AddTransactionAsync(dto);
         return Ok(new { message = "Transaction added successfully" });
     }
+
+    [HttpGet("{userId}")]
+    public async Task<IActionResult> GetUserTransactions(Guid userId)
+    {
+        var result = await _service.GetUserTransactions(userId);
+        return Ok(result);
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> GetFiltered(
+    [FromQuery] Guid userId,
+    [FromQuery] DateTime? startDate,
+    [FromQuery] DateTime? endDate)
+    {
+        var result = await _service.GetFilteredTransactions(userId, startDate, endDate);
+        return Ok(result);
+    }
 }

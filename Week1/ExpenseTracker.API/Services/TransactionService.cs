@@ -30,4 +30,41 @@ public class TransactionService
 
 		await _repository.AddAsync(transaction);
 	}
+
+	public async Task<IEnumerable<TransactionResponseDto>> GetUserTransactions(Guid userId)
+	{
+		var transactions = await _repository.GetByUserAsync(userId);
+
+		return transactions.Select(t => new TransactionResponseDto
+		{
+			Id = t.Id,
+			Amount = t.Amount,
+			Date = t.Date,
+			Note = t.Note,
+			CategoryName = t.Category != null ? t.Category.Name : "Unknown"
+		});
+	}
+
+	public async Task<IEnumerable<TransactionResponseDto>> GetFilteredTransactions(
+	Guid userId,
+	DateTime? startDate,
+	DateTime? endDate)
+	{
+		var transactions = await _repository.GetByUserAsync(userId);
+
+		if (startDate.HasValue)
+			transactions = transactions.Where(t => t.Date >= startDate.Value);
+
+		if (endDate.HasValue)
+			transactions = transactions.Where(t => t.Date <= endDate.Value);
+
+		return transactions.Select(t => new TransactionResponseDto
+		{
+			Id = t.Id,
+			Amount = t.Amount,
+			Date = t.Date,
+			Note = t.Note,
+			CategoryName = t.Category != null ? t.Category.Name : "Unknown"
+		});
+	}
 }

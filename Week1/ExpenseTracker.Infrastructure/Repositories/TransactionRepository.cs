@@ -15,9 +15,11 @@ public class TransactionRepository : ITransactionRepository
         _context = context; 
     }
 
-    public async Task<IEnumerable<Transaction>> GetAllAsync(Guid userId)
+    public async Task<IEnumerable<Transaction>> GetByUserAsync(Guid userId)
     {
         return await _context.Transactions
+            .Include(t => t.Category)
+            .OrderByDescending(t => t.Date)
             .Where(t => t.UserId == userId)
             .ToListAsync();
     }
