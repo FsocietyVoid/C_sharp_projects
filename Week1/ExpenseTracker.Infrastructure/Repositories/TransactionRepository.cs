@@ -50,4 +50,11 @@ public class TransactionRepository : ITransactionRepository
             await _context.SaveChangesAsync();
         }
     }
+
+    public IQueryable<Transaction> GetQueryable()
+    {
+        return _context.Transactions
+            .Include(t => t.Category)
+            .AsQueryable();
+    }
 }

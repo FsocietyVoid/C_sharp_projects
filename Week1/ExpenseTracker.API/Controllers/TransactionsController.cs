@@ -38,4 +38,18 @@ public class TransactionsController : ControllerBase
         var result = await _service.GetFilteredTransactions(userId, startDate, endDate);
         return Ok(result);
     }
+
+    [HttpGet("total")]
+    public async Task<IActionResult> GetTotal([FromQuery] Guid userId)
+    {
+        var total = await _service.GetTotalSpending(userId);
+        return Ok(new { total });
+    }
+
+    [HttpGet("by-category")]
+    public async Task<IActionResult> GetByCategory([FromQuery] Guid userId)
+    {
+        var result = await _service.GetSpendingByCategory(userId);
+        return Ok(result);
+    }
 }
