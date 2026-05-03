@@ -1,0 +1,12 @@
+@model List<ExpenseTracker.Web.Models.TransactionResponseDto>
+
+<h2>Dashboard</h2>
+
+<h3>Total: @ViewBag.Total</h3>
+
+<ul>
+@foreach (var t in Model)
+{
+    <li>@t.Amount - @t.CategoryName</li>
+}
+</ul>

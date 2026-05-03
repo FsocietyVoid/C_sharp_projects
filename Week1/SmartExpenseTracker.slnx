@@ -4,4 +4,5 @@
   </Folder>
   <Project Path="ExpenseTracker.API/ExpenseTracker.API.csproj" />
   <Project Path="ExpenseTracker.Infrastructure/ExpenseTracker.Infrastructure.csproj" />
+  <Project Path="ExpenseTracker.Web/ExpenseTracker.Web.csproj" />
 </Solution>
